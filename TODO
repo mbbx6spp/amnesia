@@ -1,0 +1,30 @@
+
+
+
+* "where" clause
+* multiple fields in "order"
+* update
+* delete
+* perform "drop user" before a new creation
+* defaults in field declaration
+- support for primary keys made of multiple fields
+- support for "on update" and "on delete" policy
+- transaction support
+* join grammar
+* join support
+  * two-tables join
+  * support for multiple tables
+  * try/catch of "invalid_record" in join operations
+  * test for unsupported join operations for a certain DBMS
+- views
+- group by and having
+* cursors
+  * prev
+  * last
+  * delete
+  * GC
+* load_references
+* differentiate the user creating the DB (DBA) and the user *using* the DB
+* amnesia_driver behaviour
++ documentation
+
