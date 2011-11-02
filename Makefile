@@ -9,7 +9,9 @@ TARGET_PATH=$(ERLLIB)/$(TARGET_DIR)
 APP_NAME = amnesia
 
 all:
-	(cd src; make) && \
+	(cd src; make)
+
+tests:
 	(cd examples; make)
 
 clean:

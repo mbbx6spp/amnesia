@@ -46,7 +46,7 @@ test_populate:
 	$(ERL) -s test populate
 
 clean:
-	@(cd $(EBIN); $(RM) -f *.beam)
+	$(RM) -f *.beam
 
 clearbak:
 	@$(FIND) . -type f -name \*~ -exec rm {} \;
