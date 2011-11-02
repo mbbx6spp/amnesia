@@ -1,0 +1,109 @@
+<html>
+<head>
+<title>AMNESIA</title>
+<style type="text/css">
+div#container{width:100%;
+              margin:0 auto;
+              text-align:left}
+
+div#header{background: #7EA9C7;
+           height: 50pt;
+           border:1px solid #000;
+           font-size: 24pt}
+
+div#menu{float:left;
+         padding:4px;
+         border:1px solid #000;
+         width:160px}
+
+div#content{margin-top:10px;
+            margin-left:200px;
+            padding:4px;
+            border:1px solid #000}
+
+</style>
+</head>
+<body>
+
+<div id="main">
+  <div id="header">AMNESIA, Erlang Wrapper for Relational DBMS</div>
+  <div id="contentpane">
+    <div id="menu">
+    <a href="#intro">Introduction</a><br/>
+    <a href="#req">Requirements</a><br/>
+    <a href="#plat">Platforms</a><br/>
+    <a href="#down">Download</a><br/>
+    <a href="#doc">Documentation</a><br/>
+    </div>
+    <div id="content">
+<a name="intro"/>
+<h2><i>... Access your DBMS from Erlang without any line of SQL code
+...</i></h2>
+
+<b>AMNESIA</b> is an Erlang library providing an abstraction layer for
+interfacing
+relational DBMSs. The basic objective is to allow designers to integrate
+relational database support in Erlang programs using Erlang-native types
+and language constructs and thus without needing to manage SQL statements
+and DMBS-specific peculiarities. The main characteristics are
+following:
+<ul>
+<li>Easy specification of the structure of a database (tables and links) by
+means of Erlang-native types and functions.</li>
+<li>Direct creation of the tables starting from their Erlang
+specification.</li>
+<li>Direct use of Erlang records to handle database data.</li>
+<li>Simple functions for database accessing and data handling.</li>
+<li>Support for all relational operations (insert, select, join, etc.)
+by means of proper Erlang functions.</li>
+</ul>
+
+<p>AMNESIA is structured by means of a layered architecture.</p>
+
+<p>The <b>amnesia</b> module is at the topmost layer and provides the main
+high-level functions for database access. Then, on the basis of the DBMS
+chosen for the specific database implemented, the amnesia module contacts
+the proper <b>amnesia_driver</b>; the latter acts as a bridge between the
+amnesia layer and the bottom layer (<b>dbms_layer</b>), which provides the
+real interface to the specific DBMS selected.
+</p>
+
+<p>Currently AMNESIA supports only MySQL, but a driver for PostgreSQL is
+under development.</p>
+
+
+<a name="req"/>
+<h2>Requirements.</h2>
+To use AMNESIA you need
+<a href="http://www.erlang.org/" target="_new">Erlang/OTP</a> and
+ MySQL.
+
+<a name="plat"/>
+<h2>Platforms.</h2>
+AMNESIA is entirely written in Erlang, so it should be platform-independent,
+but it has been currently tested only on Linux (Debian and Kubuntu).
+
+<a name="down"/>
+<h2>Download.</h2>
+You can obtain the latest release of AMNESIA at sourceforge, following
+this <a href="http://sourceforge.net/projects/amnesia/">link</a>.
+
+<a name="doc"/>
+<h2>Documentation</h2>
+A tutorial introducing AMNESIA and how to use it is provided <a
+href="http://amnesia.sourceforge.net/user_manual/user_manual.html">here</a>.
+
+<h2>Anything else?</h2>
+AMNESIA is under development phase and many functionalities
+will be added. If you need something, please drop a mail to
+one of its authors.
+<br>
+
+<hr>
+<i>Copyright 2009, Corrado Santoro, Vincenzo Nicosia</i>
+</div>
+</div>
+</div>
+
+
+</body></html>
