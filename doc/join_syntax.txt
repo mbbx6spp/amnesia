@@ -1,0 +1,31 @@
+
+
+
+amnesia:fetch (test_db, [orders, ?JOIN, order_line ])
+
+natural su id
+
+[ {#orders, #order_line} , {#orders, #order_line} , ...]
+
+
+amnesia:fetch (test_db, [orders, ?JOIN_USING(ciccio), order_line])
+
+inner su ciccio
+
+
+amnesia:fetch (test_db, #left_join { left_table = orders,
+                                     right_table = order_line,
+                                     using = ciccio})
+
+amnesia:fetch (test_db, #left_join { left_table = orders,
+                                     right_table = order_line,
+                                     on = "id <> fdsfds (pred) "})
+
+
+amnesia:fetch (test_db,
+               #join { left_table = orders,
+                       right_table = #join { left_table = order_line,
+                                             right_table = ... })
+
+view (ciccio) ->
+  {#join {....}, .., ...};
