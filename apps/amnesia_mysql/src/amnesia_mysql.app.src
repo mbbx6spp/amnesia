@@ -1,0 +1,14 @@
+%%-*- mode: erlang -*-
+{application, amnesia_mysql,
+ [
+  {description, ""},
+  {vsn, "0.1.0"},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib
+                 ]},
+  {mod, { amnesia_mysql_app, []}},
+  {env, []}
+ ]}.
+%% vim: set filetype=erlang tabstop=2

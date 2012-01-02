@@ -1,0 +1,14 @@
+%%-*- mode: erlang -*-
+{application, amnesia_core,
+ [
+  {description, "Amnesia core functionality"},
+  {vsn, "0.1.0"},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib
+                 ]},
+  {mod, { amnesia_core_app, []}},
+  {env, []}
+ ]}.
+%% vim: set filetype=erlang tabstop=2

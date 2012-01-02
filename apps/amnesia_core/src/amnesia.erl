@@ -441,9 +441,9 @@ generate (Module, Driver, DBMSOptions, TableDefs, [H | T])
           fun ({TName, TD}) ->
                   IndexFields =
                       lists:filter (
-                        fun ({FieldName, _, Options}) when not (is_list(Options)) ->
+                        fun ({_FieldName, _, Options}) when not (is_list(Options)) ->
                                 lists:member (index, [Options]);
-                            ({FieldName, _, Options}) when is_list(Options) ->
+                            ({_FieldName, _, Options}) when is_list(Options) ->
                                 lists:member (index, Options);
                             (_) -> false
                         end,
@@ -458,14 +458,14 @@ generate (Module, Driver, DBMSOptions, TableDefs, [H | T])
 
     CreateIndexStatements =
         lists:map (
-          fun ({TName, []}) -> "";
+          fun ({_TName, []}) -> "";
               ({TName, IndexFieldNames}) ->
                   lists:foldl (
-                    fun (X, Acc) ->
-                            Stmt = lists:flatten (["create index ",
-                                                   atom_to_list (X), "_index on ",
-                                                   atom_to_list (TName),
-                                                   "(", atom_to_list(X), ")"])
+                    fun (X, _Acc) ->
+                            lists:flatten (["create index ",
+                                           atom_to_list (X), "_index on ",
+                                           atom_to_list (TName),
+                                           "(", atom_to_list(X), ")"])
                     end, [], IndexFieldNames)
           end,
           Indexes),
@@ -584,7 +584,7 @@ generate_constraints (Driver, [H | T]) ->
 %% -------------------------------------------------------------------
 %%  Function: generate_constraint/2
 %% -------------------------------------------------------------------
-generate_constraint (Driver, R = #'$refers_to' { on_update = OnUpdate, on_delete = OnDelete }) ->
+generate_constraint (_Driver, R = #'$refers_to' { on_update = OnUpdate, on_delete = OnDelete }) ->
     lists:flatten (["index ",
                     atom_to_list (R#'$refers_to'.to),
                     "_index_id(", atom_to_list (R#'$refers_to'.to), "_id), ",
@@ -596,7 +596,7 @@ generate_constraint (Driver, R = #'$refers_to' { on_update = OnUpdate, on_delete
                     " ",
                     foreign_key_constraint ("on delete", OnDelete)
                    ]);
-generate_constraint (Driver, {FieldName, FieldType, Options}) ->
+generate_constraint (_Driver, {_FieldName, _FieldType, _Options}) ->
     [ ].
 
 
@@ -609,7 +609,7 @@ foreign_key_constraint (Type, no_action) ->
     [Type, " no action"];
 foreign_key_constraint (Type, set_null) ->
     [Type, " set null"];
-foreign_key_constraint (Type, null) ->
+foreign_key_constraint (_Type, null) ->
     [].
 
 %% -------------------------------------------------------------------
@@ -1016,15 +1016,6 @@ extract_references (TableData) ->
 
 
 %% -------------------------------------------------------------------
-%%  Function: map_to_record/2
-%% -------------------------------------------------------------------
-map_to_record (RecordName, RetrievedData) ->
-  lists:map (fun (X) ->
-                 list_to_tuple ([RecordName | X])
-             end, RetrievedData).
-
-
-%% -------------------------------------------------------------------
 %%  Function: resolve_relations/2
 %% -------------------------------------------------------------------
 resolve_relations ([], []) -> [];
@@ -1120,7 +1111,6 @@ fetch_all (Driver, DriverPID, TID, _DBName, TableName, Predicate, Options) ->
                     P -> [" where ", P, " "]
                 end,
 
-        Aggregate =
         {AggregationMode, AggregationType, AggregationField,
          AggregationFunction, HavingClause} = get_aggregate_function (Options),
 
@@ -1680,36 +1670,6 @@ cast_to_sql (Value, _) -> Value.
 %%
 
 
-
-%% ===================================================================
-%%  Function: type_check/2
-%% ===================================================================
-type_check (null, _) -> true;
-type_check (Value, Type) when ((Type == varchar) or
-                               (Type == char) or
-                               (Type == text)) and
-                              (is_list (Value)) -> true;
-type_check (Value, int) when is_integer (Value) -> true;
-type_check (Value, integer) when is_integer (Value) -> true;
-type_check (Value, decimal) when is_float (Value) -> true;
-type_check (Value, {decimal, _, _}) when is_float (Value) -> true;
-type_check ({Y, M, D}, date) when is_integer (Y),
-                                  is_integer (M),
-                                  is_integer (D) -> true;
-type_check ({{Y, M, D}, {_HH, _MM, _SS}}, date) when is_integer (Y),
-                                                     is_integer (M),
-                                                     is_integer (D) -> true;
-type_check ({{Y, M, D} , {HH, MM, SS}}, datetime) when is_integer (Y),
-                                                       is_integer (M),
-                                                       is_integer (D),
-                                                       is_integer (HH),
-                                                       is_integer (MM),
-                                                       is_integer (SS) -> true;
-type_check (_, _) -> false.
-%%
-
-
-
 %% ===================================================================
 %%
 %%                  DATE-TIME CONVERSION FUNCTIONS
@@ -1749,16 +1709,6 @@ sql_date_to_erlang_date ([Y1, Y2, Y3, Y4, _, M1, M2, _, D1, D2]) ->
   {list_to_integer ([Y1, Y2, Y3, Y4]),
    list_to_integer ([M1, M2]),
    list_to_integer ([D1, D2])}.
-
-
-%% ===================================================================
-%%  Function: sql_date_to_erlang_date_time/1
-%% ===================================================================
-sql_date_to_erlang_date_time ([Y1, Y2, Y3, Y4, _, M1, M2, _, D1, D2]) ->
-  { {list_to_integer ([Y1, Y2, Y3, Y4]),
-     list_to_integer ([M1, M2]),
-     list_to_integer ([D1, D2])},
-    {0,0,0} }.
 
 
 %% ===================================================================
