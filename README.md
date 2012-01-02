@@ -3,9 +3,11 @@
 ## WARNING!
 
 THIS IS A FORK of the official repository to fit my own needs
-(@SusanPotter - ask me on Twitter what I am up to if you like).
+([@SusanPotter](https://twitter.com/SusanPotter) - ask me on
+Twitter what I am up to if you like).
 
-My needs are:
+My foreseeable needs are:
+
 * To be able to install it as a rebar dependency (DONE)
 * To offer session/state management capabilities (NOT DONE YET)
 * Optional: add postgresql driver support (NOT DONE YET)
@@ -20,7 +22,12 @@ attempts to make accessing RDBMS database tables easier.
 Please see the license files in this repository for the original
 notice.
 
-The official repository appears to be on sourceforge.
+The official repository appears to be on
+[SourceForge](http://sourceforge.net/projects/amnesia/).
 
-Thanks,
-Susan (mbbx6spp on GitHub)
+You can read the
+[official documentation here](http://amnesia.sourceforge.net/).
+
+Enjoy!
+
+Susan ([mbbx6spp on Github](https://github.com/mbbx6spp))
