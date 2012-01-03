@@ -1,4 +1,3 @@
-ebin/*.beam
-ebin/*.app
+ebin/
 priv/log/
 *.beam
